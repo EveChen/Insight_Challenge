@@ -1,7 +1,7 @@
+# Version 1: Efficiently clean the data with OOP structure (takes 6 seconds to process)
 
-
-# OOP Version: Take roughly 11 seconds to process
 import sys
+import time
 
 class H1BCounts:
     def __init__(self, input_file, output_top10_job, output_top10_state):
@@ -18,7 +18,7 @@ class H1BCounts:
         self.job_header = "TOP_OCCUPATIONS;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE"
         self.state_header = "TOP_STATES;NUMBER_CERTIFIED_APPLICATIONS;PERCENTAGE"
 
-    def read_data(self, input_file, filter_column):
+    def read_data(self, input_file):
         with open(self.input_file, "r") as f:
             headers = f.readline().split(";")
 
@@ -26,9 +26,14 @@ class H1BCounts:
                 values = line.split(";")
                 raw_data = dict(zip(headers, values))
 
+                # Filter the "CERTIFIED" case. If it's before year 2014, needs to change 'CASE_STATUS' to 'STATUS'
                 if raw_data['CASE_STATUS'] != "CERTIFIED":
                     continue
 
+                # Use two dictionary to save the specific term frequency
+                # If it's before year 2014, needs to change:
+                    #1. 'SOC_NAME' to 'LCA_CASE_SOC_NAME'
+                    #2. 'WORKSITE_STATE' to 'LCA_CASE_WORKLOC1_STATE'
                 self.job_dict[raw_data['SOC_NAME']] = self.job_dict.get(raw_data['SOC_NAME'], 0) + 1
                 self.state_dict[raw_data['WORKSITE_STATE']] = self.state_dict.get(raw_data['WORKSITE_STATE'], 0) + 1
                 self.total_certified += 1
@@ -67,14 +72,17 @@ class H1BCounts:
                 output = row[0] + ';' + str(row[1]) + ';' + str(row[2]) + '%'
                 f.write(output + '\n')
 
+
 def H1BCount(input_file, output_top10_job, output_top10_state):
-    print("Start processing the data!")
-
+    t1 = time.time()
+    print("Start processing the data...")
     result = H1BCounts(input_file, output_top10_job, output_top10_state)
-    job = result.read_data(input_file, 'SOC_NAME')
-    state = result.read_data(input_file, 'WORKSITE_STATE')
 
-    print("Loading data - Finished!!")
+    # Load the csv file and generate two dictionary to record the individual counts for both the occupations and states
+    result.read_data(input_file)
+
+    t2 = time.time()
+    print("It takes {} seconds to clean the data".format(round(t2 - t1, 2)))
 
     # Sort top 10 occupations and states based on the number of individual counts (descending order) and the names (alphabetical order)
     result.sort_top10()
@@ -85,20 +93,23 @@ def H1BCount(input_file, output_top10_job, output_top10_state):
     # Output two txt files: top_10_occupations.txt and top_10_states.txt
     result.write_output_job()
     result.write_output_state()
-
-    print("Output files successfully!")
+    print("Congratulation! Two txt files have been generated!")
 
 if __name__ == '__main__':
     H1BCount(sys.argv[1], sys.argv[2], sys.argv[3])
 
 
-# Non-OOP Version: Save raw data into a list, which takes 20 seconds to process
+
+# Version 2: Not an efficient way to clean the data (takes 20 seconds to process)
 #import sys
-#
+#import time
 #
 ## Our main function
 #
 #def H1BCount(input_file, output_top10_job, output_top10_state):
+#
+#    t1 = time.time()
+#    print("Start processing the data...")
 #
 #    # open file first
 #    with open(input_file, 'r') as f:
@@ -115,6 +126,9 @@ if __name__ == '__main__':
 #    # Use "count_freq" function to get job counts and state counts (all in dictionary datatype)
 #    job = count_freq(certified_data, 'SOC_NAME') #If it's before year 2014, needs to change to 'LCA_CASE_SOC_NAME'
 #    state = count_freq(certified_data, 'WORKSITE_STATE') #If it's before year 2014, needs to change to 'LCA_CASE_WORKLOC1_STATE'
+#
+#    t2 = time.time()
+#    print("It takes {} seconds to clean the data".format(round(t2 - t1, 2)))
 #
 #    # Use "sort_top10" function to sort top 10 job counts/state counts with descending order
 #    sort_job = sort_top10(job)
@@ -135,6 +149,7 @@ if __name__ == '__main__':
 #    write_output(output_top10_job, top10_job_header, job_per)
 #    write_output(output_top10_state, top10_state_header, state_per)
 #
+#    print("Congratulation! Two txt files have been generated!")
 #
 ## Get job counts and state counts in dictionary datatype
 #def count_freq(file, filter_str):
@@ -173,5 +188,4 @@ if __name__ == '__main__':
 #
 #if __name__ == '__main__':
 #    H1BCount(sys.argv[1], sys.argv[2], sys.argv[3])
-
 

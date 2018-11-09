@@ -1,4 +1,4 @@
-# Version 1: Efficiently clean the data with OOP structure (takes 6 seconds to process)
+# Version 2: Efficiently clean the data with OOP structure (takes 6 seconds to process)
 
 import sys
 import time
@@ -41,10 +41,10 @@ class H1BCounts:
 
     # Sort top 10 job counts and state counts in a descending order
     def sort_top10(self):
-        self.sort_job = sorted(self.job_dict.items(), key = lambda s: (s[1], s[0]), reverse = True)[:10]
+        self.sort_job = sorted(self.job_dict.items(), key = lambda s: (-s[1], s[0]))[:10]
         self.sort_job = [list(elem) for elem in self.sort_job]
 
-        self.sort_state = sorted(self.state_dict.items(), key = lambda s: (s[1], s[0]), reverse = True)[:10]
+        self.sort_state = sorted(self.state_dict.items(), key = lambda s: (-s[1], s[0]))[:10]
         self.sort_state = [list(elem) for elem in self.sort_state]
 
 
@@ -72,7 +72,7 @@ class H1BCounts:
                 output = row[0] + ';' + str(row[1]) + ';' + str(row[2]) + '%'
                 f.write(output + '\n')
 
-
+# Our main function
 def H1BCount(input_file, output_top10_job, output_top10_state):
     t1 = time.time()
     print("Start processing the data...")
@@ -95,12 +95,14 @@ def H1BCount(input_file, output_top10_job, output_top10_state):
     result.write_output_state()
     print("Congratulation! Two txt files have been generated!")
 
+# If this py file is called, all the codes will be executed; if this py file is imported to other py files, then the codes below this if statement will not be executed.
 if __name__ == '__main__':
+    # List of my command line arguments
     H1BCount(sys.argv[1], sys.argv[2], sys.argv[3])
 
 
 
-# Version 2: Not an efficient way to clean the data (takes 20 seconds to process)
+# Version 1: Not an efficient way to clean the data (takes 20 seconds to process)
 #import sys
 #import time
 #
@@ -165,7 +167,7 @@ if __name__ == '__main__':
 #
 ## Sort top 10 job counts and state counts in a descending order
 #def sort_top10(file):
-#    sort = sorted(file.items(), key = lambda s: s[1], reverse = True)[:10]
+#    sort = sorted(file.items(), key = lambda s: (-s[1], s[0]))[:10]
 #    sort = [list(elem) for elem in sort]
 #    return sort
 #

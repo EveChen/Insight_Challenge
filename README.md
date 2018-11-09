@@ -18,13 +18,14 @@
 *Note: I did not use packages like pandas, csv, numpy etc*
 
 ### Comparison (Two versions)
-* Version 1: Directly save **Occupation counts** and **State counts** to dictionary without saving the original data. OOP used.
-* Version 2: Save the data line by line and then creates two dictionary to store **Occupation counts** and **State counts**. OOP not used.
+* Version 1: Save the data line by line and then creates two dictionary to store **Occupation counts** and **State counts**. OOP not used.
+* Version 2: Directly save **Occupation counts** and **State counts** to dictionary without saving the original data. OOP used.
 
-| Version  | Speed | Data Structure | OOP |
-| -------- | -------- | --------- | --------- |
-| Version 1 | 6 seconds | dictionary | Yes |
-| Version 2 | 20 seconds | list | No |
+
+| Version  | Speed | Data Structure (load file)| Data Structure (count frequency)| Data Structure (sort) | OOP |
+| -------- | -------- | --------- | --------- | --------- | --------- |
+| Version 1 | 20 seconds | list | dictionary | tuple | Yes |
+| Version 2 | 6 seconds | x | dictionary | tuple | No |
 
 
 

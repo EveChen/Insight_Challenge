@@ -24,8 +24,8 @@
 
 | Version  | Speed | Data Structure (load file)| Data Structure (count frequency)| OOP |
 | -------- | -------- | --------- | --------- | --------- |
-| Version 1 | 20 seconds | list | dictionary | Yes |
-| Version 2 | 6 seconds | x | dictionary | No |
+| Version 1 | 20 seconds | list | dictionary | No |
+| Version 2 | 6 seconds | x | dictionary | Yes |
 
 
 

@@ -18,15 +18,33 @@
 *Note: I did not use packages like pandas, csv, numpy etc*
 
 ### Comparison (Two versions)
-* Version 1: Save the data line by line and then creates two dictionary to store **Occupation counts** and **State counts**. OOP not used.
-* Version 2: Directly save **Occupation counts** and **State counts** to dictionary without saving the original data. OOP used.
+* Version 1: Save the data line by line and then creates two dictionary to store **Occupation counts** and **State counts**.
+* Version 2: Directly save **Occupation counts** and **State counts** to dictionary without saving the original data. 
 
 
 | Version  | Speed | Data Structure (load file)| Data Structure (count frequency)| OOP |
-| -------- | -------- | --------- | --------- | --------- | --------- |
+| -------- | -------- | --------- | --------- | --------- |
 | Version 1 | 20 seconds | list | dictionary | Yes |
 | Version 2 | 6 seconds | x | dictionary | No |
 
+
+
+### Plan for the Future
+#### **Question: Find the average certified amount for each occupations**
+1. Example
+  * year 2016: ("job1", 150), ("job2", 100), ("job3", 50)
+  * year 2015: ("job1", 200), ("job2", 80)
+
+2. Record frequency - **mapValues**
+  * year 2016: ("job1", (150, 1)), ("job2", (100, 1)), ("job3", (50, 1))
+  * year 2015: ("job1", (200, 1)), ("job2", (80, 1))
+  
+
+3. Sum the values by key - **reduceByKey**
+("job1", (350, 2)), ("job2", (180, 2)), ("job3", (50, 1))
+
+4. Calculate the average certified amount - **mapValues & collect**
+("job1", 175), ("job2", 90), ("job3", 50)
 
 
 ### Assumptions
@@ -39,19 +57,6 @@ In my code, I use **"CASE_STATUS"**, **"SOC_NAME"** and **"WORKSITE_STATE"**, wh
   * Problem: The **"WORKSITE_STATE"** column also stores city names or other contents, which I did not clean them.
   * Solution: Remove non-state contents.
 
-
-### Plan for the Future
-#### **Question: Find the average certified amount for each occupations**
-*1. Example*
-  * year 2016: ("job1", 150), ("job2", 100), ("job3", 50)
-  * year 2015: ("job1", 200), ("job2", 80)
-*2. Record frequency - mapValues*
-  * year 2016: ("job1", (150, 1)), ("job2", (100, 1)), ("job3", (50, 1))
-  * year 2015: ("job1", (200, 1)), ("job2", (80, 1))
-*3. Sum the values by key - reduceByKey*
-("job1", (350, 2)), ("job2", (180, 2)), ("job3", (50, 1))
-*4. Calculate the average certified amount - mapValues & collect*
-("job1", 175), ("job2", 90), ("job3", 50)
 
 
 ### How to Execute

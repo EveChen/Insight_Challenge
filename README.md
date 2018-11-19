@@ -42,8 +42,8 @@ The original description about this challenge is [here](https://github.com/Insig
 
 | Version  | Speed | Data Structure | OOP | Column Names (by year) |
 | -------- | -------- | --------- | --------- | --------- | 
-| Version 1 | 20 seconds | list | No | Not filter |
-| Version 2 | 6 seconds | dictionary | Yes | Not filter |
+| Version 1 | 20 seconds | list | No | Fixed column names |
+| Version 2 | 6 seconds | dictionary | Yes | Fixed column names |
 | Version 3 | 4 ~ 5 seconds | dictionary | Yes | Filtered (with **if** statements) |
 | Version 4 | 4 ~ 5 seconds | dictionary | Yes | Filtered (with **set** intersections) |
 

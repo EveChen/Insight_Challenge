@@ -55,7 +55,7 @@ One of the challenges in this task is that the column names vary for different y
 
 * To filter **Status Column**: Use *status* as a keyword
 * To filter **Occupation Column**: Use *soc_name* or *occupational_title* as keywords
-* To filter **State Column**: Use *workloc1* or *worksite* as keywords
+* To filter **State Column**: Use *workloc1* or *worksite_state* or *state_1* as keywords
 
 
 | Year  | Status Column | Occupation Column | State Column | Link |

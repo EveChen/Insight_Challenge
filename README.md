@@ -6,6 +6,8 @@
 4. Sort the counts and select top 10 items
 5. Output the results to ```top_10_occupations.txt``` and ```top_10_states.txt```
 
+
+
 ### My Approach
 1. Directly open the file, read the data line by line, filter the "CERTIFIED" data and count the numbers of *Occupations* & *States*.
 **Key point:** I did not save the raw data to a list but only save the term frequencies to two dictionaries, which represent the numbers of *Occupations* and *States*.
@@ -16,6 +18,8 @@
 **Key point:** Use OOP to make codes more scalable, reusable and understandable.
 
 *Note: I did not use packages like pandas, csv, numpy etc*
+
+
 
 ### Column Names
 One of the challenges in this task is that the column names vary for different year ranges. Here's the table I organized from **File Structure** pdf files.
@@ -33,17 +37,19 @@ One of the challenges in this task is that the column names vary for different y
 
 
 
+
+
 ### Comparison (Two versions)
 * Version 1: Save the data line by line and then creates two dictionary to store **Occupation counts** and **State counts**.
 * Version 2: Directly save **Occupation counts** and **State counts** to dictionary without saving the original data. 
 
 
-| Version  | Speed | Data Structure (load file)| Data Structure (count frequency)| OOP | Column Names |
-| -------- | -------- | --------- | --------- | --------- | -------- |
-| Version 1 | 20 seconds | list | dictionary | No | Not fix |
-| Version 2 | 6 seconds | x | dictionary | Yes | Not fix |
-| Version 3 | 5 seconds | x | dictionary | Yes | Fix (with **if** statements) |
-| Version 4 | 4 seconds | x | dictionary | Yes | Fix (with **set** intersections) |
+| Version  | Speed | Data Structure | OOP | Column Names |
+| -------- | -------- | --------- | --------- | --------- | 
+| Version 1 | 20 seconds | list | No | Not fix |
+| Version 2 | 6 seconds | dictionary | Yes | Not fix |
+| Version 3 | 5 seconds | dictionary | Yes | Fix (with **if** statements) |
+| Version 4 | 4 seconds | dictionary | Yes | Fix (with **set** intersections) |
 
 
 ### Plan for the Future

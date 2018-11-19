@@ -78,7 +78,7 @@ Note: There are two similar column names for filtering the State: *LCA_CASE_WORK
 ---
 
 ### How to Execute
-Please run ```./run.sh``` and you will see two output files in the output folder.
+Please run ```./run.sh``` and you will see two output files in the output folder. Please note that the default version is **version 4**, which is the fastest version. If you want to run other versions, please change the code `./src/H1BCounts_version4.py` in file `run.sh`.
 
 ---
 

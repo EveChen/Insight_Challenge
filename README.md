@@ -14,19 +14,19 @@ The original description about this challenge is [here](https://github.com/Insig
 ### My Approach
 1. Open the file, read the data line by line, filter the "CERTIFIED" data and count the numbers of *Occupations* & *States*.
 
-  * ###### **Key point:** I did not save the raw data to a list but only save the term frequencies to two dictionaries, which represent the numbers of *Occupations* and *States*. Also, I'm aware of the column names which vary for different year ranges. I used either `if` conditions or `set` intersections to deal with this problem. 
+    * ###### **Key point:** I did not save the raw data to a list but only save the term frequencies to two dictionaries, which represent the numbers of *Occupations* and *States*. Also, I'm aware of the column names which vary for different year ranges. I used either `if` conditions or `set` intersections to deal with this problem. 
 
 2. Sort two ditionaries by the built-in function and set two orders as the question requested.
 
-  * ###### **Key point:** Sorted by **NUMBER_CERTIFIED_APPLICATIONS**. Also, in case of a tie, alphabetically sorted by **TOP_OCCUPATIONS** or **TOP_STATES**.
+    * ###### **Key point:** Sorted by **NUMBER_CERTIFIED_APPLICATIONS**. Also, in case of a tie, alphabetically sorted by **TOP_OCCUPATIONS** or **TOP_STATES**.
 
 3. Calculate percentages and add the results to the sorting lists.
 
-  * ###### **Key point:** Because tuples are immunicable, I change the original sort tuples to lists that we can further calculate percentages.
+    * ###### **Key point:** Because tuples are immunicable, I change the original sort tuples to lists that we can further calculate percentages.
 
 4. Write output files ```top_10_occupations.txt``` and ```top_10_states.txt```.
 
-  * ###### **Key point:** Use OOP to make codes more scalable, reusable and understandable.
+    * ###### **Key point:** Use OOP to make codes more scalable, reusable and understandable.
 
 *Note: I did not use packages like pandas, csv, numpy etc*
 

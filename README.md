@@ -40,12 +40,12 @@ The original description about this challenge is [here](https://github.com/Insig
 * Version 4: Same as the above problem, I use `set` to find the intersected column names.
 
 
-| Version  | Speed | Data Structure | OOP | Column Names |
+| Version  | Speed | Data Structure | OOP | Column Names (by year) |
 | -------- | -------- | --------- | --------- | --------- | 
-| Version 1 | 20 seconds | list | No | Not fix |
-| Version 2 | 6 seconds | dictionary | Yes | Not fix |
-| Version 3 | 4 ~ 5 seconds | dictionary | Yes | Fixed (with **if** statements) |
-| Version 4 | 4 ~ 5 seconds | dictionary | Yes | Fixed (with **set** intersections) |
+| Version 1 | 20 seconds | list | No | Not filter |
+| Version 2 | 6 seconds | dictionary | Yes | Not filter |
+| Version 3 | 4 ~ 5 seconds | dictionary | Yes | Filtered (with **if** statements) |
+| Version 4 | 4 ~ 5 seconds | dictionary | Yes | Filtered (with **set** intersections) |
 
 
 ---

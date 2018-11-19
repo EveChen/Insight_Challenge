@@ -1,7 +1,10 @@
 # Insight Data Engineer Challenge
 ### Problem
+The original description about this challenge is [here](https://github.com/InsightDataScience/h1b_statistics)
+
+
 1. Get "CERTIFIED" cases
-2. Get **Occupation counts** and **State counts** 
+2. Get **Occupation counts** and **State counts** (*Be aware of the yearly column names)
 3. Get the percentage, which is (Numbers of Occupation or State counts / Total Certified Case) * 100%
 4. Sort the counts and select top 10 items
 5. Output the results to ```top_10_occupations.txt``` and ```top_10_states.txt```
@@ -9,11 +12,16 @@
 ---
 
 ### My Approach
-1. Directly open the file, read the data line by line, filter the "CERTIFIED" data and count the numbers of *Occupations* & *States*.
-**Key point:** I did not save the raw data to a list but only save the term frequencies to two dictionaries, which represent the numbers of *Occupations* and *States*.
+1. Open the file, read the data line by line, filter the "CERTIFIED" data and count the numbers of *Occupations* & *States*.
+
+**Key point:** I did not save the raw data to a list but only save the term frequencies to two dictionaries, which represent the numbers of *Occupations* and *States*. Also, I'm aware of the column names which vary for different year ranges. I used either `if` conditions or `set` intersections to deal with this problem. 
+
 2. Sort two ditionaries by the built-in function and set two orders as the question requested.
+**Key point:** Sorted by **NUMBER_CERTIFIED_APPLICATIONS**. Also, in case of a tie, alphabetically sorted by **TOP_OCCUPATIONS** or **TOP_STATES**.
+
 3. Calculate percentages and add the results to the sorting lists.
 **Key point:** Because tuples are immunicable, I change the original sort tuples to lists that we can further calculate percentages.
+
 4. Write output files ```top_10_occupations.txt``` and ```top_10_states.txt```.
 **Key point:** Use OOP to make codes more scalable, reusable and understandable.
 
@@ -21,8 +29,31 @@
 
 ---
 
-### Column Names
+
+### Results Comparison (Four versions)
+* Version 1: Save the data line by line and then creates two dictionary to store **Occupation counts** and **State counts**.
+* Version 2: Directly save **Occupation counts** and **State counts** to dictionary without saving the original data. 
+* Version 3: Because column names vary by years, I decide to use `if` conditions to filter the columns we want. e.g. `if "soc_name" in header.lower() or "occupational_title" in header.lower()...`
+* Version 4: Same as the above problem, I use `set` to find the intersected column names.
+
+
+| Version  | Speed | Data Structure | OOP | Column Names |
+| -------- | -------- | --------- | --------- | --------- | 
+| Version 1 | 20 seconds | list | No | Not fix |
+| Version 2 | 6 seconds | dictionary | Yes | Not fix |
+| Version 3 | 4 ~ 5 seconds | dictionary | Yes | Fix (with **if** statements) |
+| Version 4 | 4 ~ 5 seconds | dictionary | Yes | Fix (with **set** intersections) |
+
+
+---
+
+### Challenge - Column Names
 One of the challenges in this task is that the column names vary for different year ranges. Here's the table I organized from **File Structure** pdf files. I use the following column names to filter our data by year.
+
+* To filter **Status Column**: Use *status* as a keyword
+* To filter **Occupation Column**: Use *soc_name* or *occupational_title* as keywords
+* To filter **State Column**: Use *workloc1* or *worksite* as keywords
+
 
 | Year  | Status Column | Occupation Column | State Column | Link |
 | -------- | -------- | --------- | --------- | -------- |
@@ -37,37 +68,8 @@ One of the challenges in this task is that the column names vary for different y
 | 2009 | STATUS | LCA_CASE_SOC_NAME | LCA_CASE_WORKLOC1_STATE | [link](https://www.foreignlaborcert.doleta.gov/pdf/H1B_Layout_FY09.doc)  |
 | 2008 | Approval_Status | Occupational_Title | State_1 | [link](https://www.foreignlaborcert.doleta.gov/pdf/H-1B_Record_Layout_FY08.doc)  |
 
+Note: There are two similar column names for filtering the State: *LCA_CASE_WORKLOC1_STATE* and *LCA_CASE_WORKLOC2_STATE*. Because *LCA_CASE_WORKLOC2_STATE* has more missing values, I decide to use *LCA_CASE_WORKLOC1_STATE* to filter our State column name.
 
----
-
-
-### Comparison (Four versions)
-* Version 1: Save the data line by line and then creates two dictionary to store **Occupation counts** and **State counts**.
-* Version 2: Directly save **Occupation counts** and **State counts** to dictionary without saving the original data. 
-* Version 3: Because column names vary by years, I decide to use `if` conditions to filter the columns we want. e.g. `if "soc_name" in header.lower() or "occupational_title" in header.lower()...`
-* Version 4: Same as the above problem, I use `set` to find the intersected column names.
-
-
-| Version  | Speed | Data Structure | OOP | Column Names |
-| -------- | -------- | --------- | --------- | --------- | 
-| Version 1 | 20 seconds | list | No | Not fix |
-| Version 2 | 6 seconds | dictionary | Yes | Not fix |
-| Version 3 | 5 seconds | dictionary | Yes | Fix (with **if** statements) |
-| Version 4 | 4 seconds | dictionary | Yes | Fix (with **set** intersections) |
-
----
-
-
-
-### Assumptions
-1. The column names
-In my code, I use **"CASE_STATUS"**, **"SOC_NAME"** and **"WORKSITE_STATE"**, which fits the data in year 2016 and 2015.
-  * Problem: Sometimes, the column names will change by year. For example, In year 2016, the occupation was stored in "SOC_NAME" column. However, in year 2014, the occupation was stored in "LCA_CASE_SOC_NAME" column.
-  * Solution: Change manually. Or we can create a column list to store column names by year. Afterward, we can compare this column list with the header from our raw data. However, this method will increase the time/space complexity.
-
-2. Ignore typos
-  * Problem: The **"WORKSITE_STATE"** column also stores city names or other contents, which I did not clean them.
-  * Solution: Remove non-state contents.
 
 
 ---

@@ -17,16 +17,33 @@
 
 *Note: I did not use packages like pandas, csv, numpy etc*
 
+### Column Names
+One of the challenges in this task is that the column names vary for different year ranges. Here's the table I organized from **File Structure** pdf files.
+
+| Year  | Status Column | Occupation Column | State Column | Link |
+| -------- | -------- | --------- | --------- | -------- |
+| 2017 | CASE_STATUS | SOC_NAME | WORKSITE_STATE | [link](https://www.foreignlaborcert.doleta.gov/pdf/PerformanceData/2017/H-1B_FY17_Record_Layout.pdf)
+| 2016 | CASE_STATUS | SOC_NAME | WORKSITE_STATE | [link](https://www.foreignlaborcert.doleta.gov/docs/Performance_Data/Disclosure/FY15-FY16/H-1B_FY16_Record_Layout.pdf)  |
+| 2015 | CASE_STATUS | SOC_NAME | WORKSITE_STATE | [link](https://www.foreignlaborcert.doleta.gov/docs/py2015q4/H-1B_FY15_Record_Layout.docx)  |
+| 2014 | STATUS | LCA_CASE_SOC_NAME | LCA_CASE_WORKLOC1_STATE | [link](https://www.foreignlaborcert.doleta.gov/docs/py2014q4/H1B_FY14_Record_Layout.doc)  |
+| 2013 | STATUS | LCA_CASE_SOC_NAME | LCA_CASE_WORKLOC1_STATE | [link](https://www.foreignlaborcert.doleta.gov/docs/lca/LCA_Record_Layout_FY13.doc)  |
+| 2012 | STATUS | LCA_CASE_SOC_NAME | LCA_CASE_WORKLOC1_STATE | [link](https://www.foreignlaborcert.doleta.gov/docs/py2012_q4/LCA_Record_Layout_FY12.doc)  |
+| 2011 | STATUS | LCA_CASE_SOC_NAME | LCA_CASE_WORKLOC1_STATE | [link](https://www.foreignlaborcert.doleta.gov/pdf/quarter_4_2011/H-1B_Record_Layout_FY11_Q4.doc)  |
+| 2010 | STATUS | LCA_CASE_SOC_NAME | LCA_CASE_WORKLOC1_STATE | [link](https://www.foreignlaborcert.doleta.gov/pdf/H-1B_Record_Layout_FY10.doc)  |
+
+
+
 ### Comparison (Two versions)
 * Version 1: Save the data line by line and then creates two dictionary to store **Occupation counts** and **State counts**.
 * Version 2: Directly save **Occupation counts** and **State counts** to dictionary without saving the original data. 
 
 
-| Version  | Speed | Data Structure (load file)| Data Structure (count frequency)| OOP |
-| -------- | -------- | --------- | --------- | --------- |
-| Version 1 | 20 seconds | list | dictionary | No |
-| Version 2 | 6 seconds | x | dictionary | Yes |
-
+| Version  | Speed | Data Structure (load file)| Data Structure (count frequency)| OOP | Column Names |
+| -------- | -------- | --------- | --------- | --------- | -------- |
+| Version 1 | 20 seconds | list | dictionary | No | Not fix |
+| Version 2 | 6 seconds | x | dictionary | Yes | Not fix |
+| Version 3 | 5 seconds | x | dictionary | Yes | Fix (with **if** statements) |
+| Version 4 | 4 seconds | x | dictionary | Yes | Fix (with **set** intersections) |
 
 
 ### Plan for the Future
